@@ -1,16 +1,16 @@
 {
-  parserClass="org.opa.ideaplugin.lang.parser.RegoParser"
+  parserClass="org.openpolicyagent.ideaplugin.lang.parser.RegoParser"
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
   psiClassPrefix="Rego"
   psiImplClassSuffix="Impl"
-  psiPackage= "org.opa.ideaplugin.lang.psi"
-  psiImplPackage="org.opa.ideaplugin.lang.psi.impl"
+  psiPackage= "org.openpolicyagent.ideaplugin.lang.psi"
+  psiImplPackage="org.openpolicyagent.ideaplugin.lang.psi.impl"
 
-  elementTypeHolderClass="org.opa.ideaplugin.lang.psi.RegoTypes"
-  elementTypeClass="org.opa.ideaplugin.lang.psi.RegoElementType"
-  tokenTypeClass="org.opa.ideaplugin.lang.psi.RegoTokenType"
+  elementTypeHolderClass="org.openpolicyagent.ideaplugin.lang.psi.RegoTypes"
+  elementTypeClass="org.openpolicyagent.ideaplugin.lang.psi.RegoElementType"
+  tokenTypeClass="org.openpolicyagent.ideaplugin.lang.psi.RegoTokenType"
 
    tokens = [
        // literals
@@ -105,7 +105,7 @@ object-body         ::= ( assignment | object-item | condition | standalone | ne
 object-item         ::= scalar COLON? assignment-body?
 assignment-body     ::= function | calculation | object | standalone | scalar | ref
 
-standalone          ::= some-decl | comprehension | comprehension-head | array-type | set-type
+standalone          ::= some-decl | comprehension | comprehension-head | array-type | set
 
 negation            ::= NOT_KW? (function | ref)
 ref                 ::= VAR ref-arg*
@@ -116,6 +116,7 @@ comprehension-body  ::= (assignment | condition) SEMIC?
 
 array-type          ::= LBRACK array-body RBRACK
 array-body          ::= (assignment-body | rule-body)? (COMMA (assignment-body | rule-body)?)*
+set                 ::= empty-set | set-type
 set-type            ::= LBRACE (assignment-body | rule-body)? (COMMA (assignment-body | rule-body))* RBRACE
 ref-arg             ::= ref-arg-dot | ref-arg-brack
 ref-arg-brack       ::= LBRACK ( scalar | VAR | UNDER | DOT )* RBRACK
@@ -130,3 +131,4 @@ bool-operator       ::= "==" | "!=" | "<" | ">" | ">=" | "<="
 arith-operator      ::= "+" | "-" | "*" | "/"
 bin-operator        ::= "&" | "|"
 assignment-operator ::= ":=" | "="
+empty-set           ::= "set(" ")"

@@ -8,11 +8,12 @@ package org.openpolicyagent.ideaplugin.lang
 import com.intellij.testFramework.ParsingTestCase
 import org.openpolicyagent.ideaplugin.OpaTestBase
 import org.openpolicyagent.ideaplugin.OpaTestCase
+import org.openpolicyagent.ideaplugin.OpaTestCase.Companion.testResourcesPath
 import org.openpolicyagent.ideaplugin.lang.parser.RegoParserDefinition
 import org.openpolicyagent.ideaplugin.openapiext.execute
 import java.util.concurrent.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
-import org.opa.ideaplugin.opa.tool.OpaBaseTool.Companion.opaBinary
+import org.openpolicyagent.ideaplugin.opa.tool.OpaBaseTool.Companion.opaBinary
 
 
 abstract class RegoParsingTestCaseBase() : ParsingTestCase(

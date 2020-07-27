@@ -3,11 +3,11 @@
  * found in the LICENSE file.
  */
 
-package org.opa.ideaplugin.lang.psi
+package org.openpolicyagent.ideaplugin.lang.psi
 
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
-import org.opa.ideaplugin.lang.RegoLanguage
+import org.openpolicyagent.ideaplugin.lang.RegoLanguage
 
 class RegoTokenType(debugName: String) : IElementType(debugName, RegoLanguage)
 
@@ -40,3 +40,5 @@ val REGO_OPERATOR = tokenSetOf(
     RegoTypes.GT,
     RegoTypes.GTE
 )
+
+val REGO_COMMENT = tokenSetOf(RegoTypes.COMMENT)

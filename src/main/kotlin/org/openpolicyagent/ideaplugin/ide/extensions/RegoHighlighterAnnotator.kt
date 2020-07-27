@@ -11,7 +11,7 @@ class RegoHighlighterAnnotator : Annotator {
 
     private fun styleForDeclType(definition: Any) = when (definition) {
         is RegoRule -> RegoColor.HEAD
-        is RegoExprCall -> RegoColor.CALL
+        is RegoFunctionHead -> RegoColor.CALL
         is RegoEmptySet -> RegoColor.CALL
         else -> null
     }
@@ -20,27 +20,11 @@ class RegoHighlighterAnnotator : Annotator {
     val usedColors = listOf<TextAttributesKey>(RegoColor.HEAD.textAttributesKey, RegoColor.CALL.textAttributesKey)
 
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
-        if (element is RegoRule){
+        if (element is RegoRuleName){
             val style = styleForDeclType(element)
-            val annotation = holder.createInfoAnnotation(element.ruleHead.`var`.textRange, null)
+            val annotation = holder.createInfoAnnotation(element.textRange, null)
             if (style != null){
                 annotation.textAttributes = style.textAttributesKey
-            }
-        }
-
-        if (element is RegoExprCall){
-            val style = styleForDeclType(element)
-            val varlist = element.refArgDotList
-            if (varlist.size >= 1) {
-                val annotation = holder.createInfoAnnotation(varlist[varlist.size - 1].`var`.textRange, null)
-                if (style != null){
-                    annotation.textAttributes = style.textAttributesKey
-                }
-            } else {
-                val annotation = holder.createInfoAnnotation(element.`var`.textRange, null)
-                if (style != null){
-                    annotation.textAttributes = style.textAttributesKey
-                }
             }
         }
 
