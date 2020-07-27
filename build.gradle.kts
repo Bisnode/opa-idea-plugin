@@ -22,7 +22,6 @@ plugins {
     id("org.jetbrains.grammarkit") version "2020.1"
     id("de.undercouch.download") version "3.4.3"
     id("net.saliman.properties") version "1.4.6"
-
 }
 
 
@@ -34,7 +33,7 @@ apply {
 
 }
 
-group = "org.opa"
+group = "org.openpolicyagent"
 version = "1.0.0-SNAPSHOT"
 
 
@@ -59,8 +58,10 @@ idea {
 intellij {
     version = ideaVersion
     val plugins = mutableListOf(
-        "PsiViewer:$psiViewerPluginVersion"
+        "PsiViewer:$psiViewerPluginVersion",
+            "java"
     )
+
 
     tasks{
         withType<org.jetbrains.intellij.tasks.PatchPluginXmlTask> {
@@ -69,6 +70,7 @@ intellij {
         }
     }
     setPlugins(*plugins.toTypedArray())
+
 }
 
 sourceSets {
@@ -105,7 +107,7 @@ tasks {
 
 val generateRegoLexer = task<GenerateLexer>("generateRegoLexer") {
     source = "src/main/grammar/RegoLexer.flex"
-    targetDir = "src/main/gen/org/opa/ideaplugin/lang/lexer"
+    targetDir = "src/main/gen/org/openpolicyagent/ideaplugin/lang/lexer"
     targetClass = "_RegoLexer"
     purgeOldFiles = true
 }
@@ -114,8 +116,8 @@ val generateRegoLexer = task<GenerateLexer>("generateRegoLexer") {
 val generateRegoParser = task<GenerateParser>("generateRegoParser") {
     source = "src/main/grammar/Rego.bnf"
     targetRoot = "src/main/gen"
-    pathToParser =  "/org/opa/ideaplugin/lang/parser/RegoParser.java"
-    pathToPsiRoot = "/org/opa/ideaplugin/lang/psi"
+    pathToParser =  "/org/openpolicyagent/ideaplugin/lang/parser/RegoParser.java"
+    pathToPsiRoot = "/org/openpolicyagent/ideaplugin/lang/psi"
     purgeOldFiles = true
 }
 
